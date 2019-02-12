@@ -1,3 +1,21 @@
+# Match Pair Memory Game 
+
+## Table of Contents
+
+* [Descriptions](#descriptions)
+* [Credits](#credits)
+* [License](#license)
+
+## Descriptions
+
+Alrighty! It's time to challenge your memory! Click on cards to flip the cards face up. If the pattern on two cards are matched, the cards will stay flipped. If not, the cards will be flipped back. Try to remember the pattern of each card to win the game in fewer moves and less time. You can restart the game at any time. No cheating ;)
+
+## Credits
+
+This project is based on https://github.com/udacity/fend-project-memory-game 
+
+## License
+
 MIT License
 
 Copyright (c) 2019 hlin214
