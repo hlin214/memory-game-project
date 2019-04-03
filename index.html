@@ -16,13 +16,20 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+            <div class ="score-panel-left">
+                <ul class="stars">
+                    <li><i id="star" class="fa fa-star checked"></i></li>
+                    <li><i id="star" class="fa fa-star checked"></i></li>
+                    <li><i id="star" class="fa fa-star checked"></i></li>
+                </ul>
 
-        	<span id="move_count" class="moves">0</span> Moves
+                <span id="move_count" class="moves">0</span> Moves
+                <div class="timer">Timer:
+                    <span class="timerSec"></span>
+                
+                </div>
+            </div>
+        	
 
             <div class="restart">
         		<i class="fa fa-repeat"></i>
@@ -48,6 +55,7 @@
             <li class="card"></li>
 
         </ul>
+
     </div>
 
     <script src="js/app.js"></script>

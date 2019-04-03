@@ -24,6 +24,21 @@ function shuffle(array) {
     return array;
 }
 
+var timer = document.querySelector(".timerSec");
+var mins,secs;
+var totalSecs=0;
+var setTime;
+function startTimer() {
+	setTime = setInterval(calTime,1000);
+}
+function calTime(){
+	console.log("start timeing");
+	// ++totalSecs;
+	totalSecs++;
+	mins = parseInt(totalSecs/60) + " : ";
+	secs = totalSecs%60;
+	timer.innerHTML = mins + secs;
+}
 
 var cards = document.querySelectorAll(".card");
 
@@ -34,6 +49,8 @@ function startGame(){
 		newElement.className =newArray[i];
 		cards[i].appendChild(newElement);
 	}
+	startTimer();
+
 }
 function clearCard(){
 	for(var i=0;i<cards.length;i++){
@@ -42,6 +59,7 @@ function clearCard(){
 }
 
 startGame();
+
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -56,6 +74,7 @@ startGame();
 
 var openedCards = [];
 var move = 0;
+var matched =0;
 
 cards.forEach (function(card) {
 	card.addEventListener('click',function(){
@@ -64,15 +83,20 @@ cards.forEach (function(card) {
 		openedCards.push(card);
 		card.classList.add("open","show");
 
+		starsLevel(move);
 
 
 		if(openedCards.length==2){
 			var card1Pattern = openedCards[0].getElementsByTagName("i")[0].getAttribute("class");
 			var card2Pattern = openedCards[1].getElementsByTagName("i")[0].getAttribute("class");
-			if(card1Pattern==card2Pattern){
+			if(card1Pattern==card2Pattern&&openedCards[0]!=openedCards[1]){
 				openedCards[0].classList.add("match");
 				openedCards[1].classList.add("match");
-			}else {
+				matched++;
+			}else if(openedCards[0]==openedCards[1]){
+				openedCards[0].classList.remove("open","show");
+			}
+			else {
 				openedCards[0].classList.add("mismatch");
 			 	openedCards[1].classList.add("mismatch");
 			}
@@ -86,21 +110,56 @@ cards.forEach (function(card) {
 				},500);			
 			
 		}
+		setTimeout(popupGenerate,2000);
 
 	});
-})
+});
+
 
 
 var restart = document.querySelector(".restart");
 
-restart.addEventListener("click",function(){
+restart.addEventListener("click",function restart(){
 	cards.forEach(function(card){
 		card.classList.remove("open","show","match");
-	})
+	});
 	document.getElementById("move_count").textContent=0;
 	move=0;
+	totalSecs=0;
+	minute=0;
+	second=0;
 	clearCard();
+	clearTimeout(setTime);
 	startGame();
-})
+	startTimer();
+});
+
+var popup = document.querySelector(".popuptext");
+function popupGenerate(){
+	if(matched==16){
+		console.log("get pop");
+		var r = confirm("Congratulations! You Win! Time: " + mins + secs + ". Moves: " + move + " Do you want to start a new game?" )
+		if(r==true){
+			move=0;
+			totalSecs=0;
+			minute=0;
+			second=0;
+			clearCard();
+			clearTimeout(setTime);
+			startGame();
+			startTimer();
+		}
+	}
+}
+
+var stars = document.querySelectorAll("#star");
+function starsLevel(move){
+	if(move>28&&move<=40){
+		stars[0].classList.remove("checked");
+	}else if(move>40){
+		star[1].classList.remove("checked");
+	}
+}
+
 
 
